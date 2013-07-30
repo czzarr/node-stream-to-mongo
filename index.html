@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Node-stream-to-mongo by czzarr</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Node-stream-to-mongo</h1>
+        <p>Stream objects to a Mongo database</p>
+
+        <p class="view"><a href="https://github.com/czzarr/node-stream-to-mongo">View the Project on GitHub <small>czzarr/node-stream-to-mongo</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/czzarr/node-stream-to-mongo/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/czzarr/node-stream-to-mongo/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/czzarr/node-stream-to-mongo">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="streamtomongo" class="anchor" href="#streamtomongo"><span class="octicon octicon-link"></span></a>StreamToMongo</h1>
+
+<p>Stream objects straight into a MongoDB database.</p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p><code>npm install stream-to-mongo</code></p>
+
+<h2>
+<a name="main-usecase" class="anchor" href="#main-usecase"><span class="octicon octicon-link"></span></a>Main usecase</h2>
+
+<p>Seeding a database from large HTTP response or JSON file.</p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'JSONStream'</span><span class="p">).</span><span class="nx">parse</span><span class="p">(</span><span class="s1">'rows.*.doc'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">db</span><span class="o">:</span> <span class="s1">'mongodb://localhost:27017/test-stream'</span><span class="p">,</span> <span class="nx">collection</span><span class="o">:</span> <span class="s1">'docs'</span> <span class="p">}</span>
+<span class="kd">var</span> <span class="nx">streamToMongo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'stream-to-mongo'</span><span class="p">)(</span><span class="nx">options</span><span class="p">);</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="s1">'http://isaacs.couchone.com/registry/_all_docs'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">parser</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">streamToMongo</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>Test</h2>
+
+<p>Needs a MongoDB instance running.
+<code>make test</code></p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>MIT</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/czzarr">czzarr</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
