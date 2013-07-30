@@ -1,6 +1,9 @@
 # StreamToMongo
 Stream objects straight into a MongoDB database.
 
+[![Build
+Status](https://travis-ci.org/[czzarr]/[node-stream-to-mongo].png)](https://travis-ci.org/[czzarr]/[node-stream-to-mongo])
+
 ## Install
 `npm install stream-to-mongo`
 
