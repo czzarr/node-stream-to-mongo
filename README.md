@@ -8,7 +8,7 @@ Stream objects straight into a MongoDB database.
 Seeding a database from large HTTP response or JSON file.
 
 ## Example
-```
+```javascript
 var request = require('request')
 var parser = require('JSONStream').parse('rows.*.doc')
 var options = { db: 'mongodb://localhost:27017/test-stream', collection: 'docs' }
