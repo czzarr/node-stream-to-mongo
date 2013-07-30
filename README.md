@@ -21,3 +21,7 @@ request('http://isaacs.couchone.com/registry/_all_docs')
 ## Test
 Needs a MongoDB instance running.
 `make test`
+
+## License
+
+MIT
