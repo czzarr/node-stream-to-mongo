@@ -21,6 +21,9 @@ StreamToMongo.prototype._write = function (obj, encoding, done) {
     MongoClient.connect(this.options.db, function (err, db) {
       if (err) throw err;
       self.db = db;
+      self.on('finish', function () {
+        self.db.close();
+      });
       self.collection = db.collection(self.options.collection);
       self.collection.insert(obj, { w: 1 }, done);
     });
