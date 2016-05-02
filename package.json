@@ -1,5 +1,5 @@
 {
-  "name": "stream-to-mongo",
+  "name": "adamvr-stream-to-mongo",
   "version": "0.1.5",
   "description": "Write a stream of objects to a Mongo database",
   "main": "index.js",
