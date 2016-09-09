@@ -7,7 +7,7 @@ util.inherits(StreamToMongo, Writable);
 module.exports = StreamToMongo;
 
 function StreamToMongo(options) {
-  if(!(this instanceof StreamToMongo)) {
+  if (!(this instanceof StreamToMongo)) {
     return new StreamToMongo(options);
   }
   Writable.call(this, { objectMode: true });
@@ -17,6 +17,12 @@ function StreamToMongo(options) {
 
 StreamToMongo.prototype._write = function (obj, encoding, done) {
   var self = this;
+
+  var entry = typeof (obj) === typeof({})
+    ? obj
+    : JSON.parse(obj);
+
+
   if (!this.db) {
     MongoClient.connect(this.options.db, function (err, db) {
       if (err) throw err;
@@ -25,9 +31,9 @@ StreamToMongo.prototype._write = function (obj, encoding, done) {
         self.db.close();
       });
       self.collection = db.collection(self.options.collection);
-      self.collection.insert(obj, { w: 1 }, done);
+      self.collection.insert(entry, { w: 1 }, done);
     });
   } else {
-    self.collection.insert(obj, { w: 1 }, done);
+    self.collection.insert(entry, { w: 1 }, done);
   }
 };
