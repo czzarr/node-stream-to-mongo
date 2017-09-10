@@ -17,6 +17,12 @@ function StreamToMongo(options) {
 
 StreamToMongo.prototype._write = function (obj, encoding, done) {
   var self = this;
+
+  // Custom action definition
+  var action = this.options.action || function insert (obj, cb) {
+    this.collection.insert(obj, {w: 1}, cb);
+  };
+
   if (!this.db) {
     MongoClient.connect(this.options.db, function (err, db) {
       if (err) throw err;
@@ -25,9 +31,9 @@ StreamToMongo.prototype._write = function (obj, encoding, done) {
         self.db.close();
       });
       self.collection = db.collection(self.options.collection);
-      self.collection.insert(obj, { w: 1 }, done);
+      action.call(self, obj, done);
     });
   } else {
-    self.collection.insert(obj, { w: 1 }, done);
+    action.call(self, obj, done);
   }
 };
